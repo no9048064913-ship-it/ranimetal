@@ -38,15 +38,21 @@
         }
     </style>
 </head>
-<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Removed overflow-hidden, added overflow-y-auto and py-10 for better mobile scrolling -->
+<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-y-auto py-10">
 
-    <!-- Background Image -->
-    <div class="absolute inset-0 z-0">
+    <!-- Background Image - Changed to fixed so it stays put while scrolling -->
+    <div class="fixed inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1599824426573-c62551a31d99?q=80&w=2000&auto=format&fit=crop" 
              alt="Stone Crusher Background" 
              class="w-full h-full object-cover opacity-30 mix-blend-overlay">
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80"></div>
     </div>
+
+    <!-- Fullscreen Toggle Button -->
+    <button onclick="toggleFullScreen()" class="fixed top-4 right-4 z-50 p-3 btn-stone rounded-full text-white shadow-lg focus:outline-none" aria-label="Toggle Fullscreen">
+        <i data-lucide="maximize" class="w-5 h-5"></i>
+    </button>
 
     <!-- Main Content -->
     <main class="relative z-10 w-full max-w-4xl px-4 text-center fade-in">
@@ -95,6 +101,18 @@
     </main>
 
     <script>
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
