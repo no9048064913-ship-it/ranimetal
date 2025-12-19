@@ -1,121 +1,205 @@
 <!DOCTYPE html>
-<html lang="ml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stone Crusher Portal - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body { font-family: 'Manjari', sans-serif; }
-        .industrial-font { font-family: 'Russo One', sans-serif; }
-        .stone-texture {
-            background-color: #2a2a2a;
-            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23454545' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .btn-stone {
-            background: linear-gradient(145deg, #4b5563, #374151);
-            box-shadow: 5px 5px 10px #1f2937, -5px -5px 10px #4b5563;
-            transition: all 0.3s ease;
-            border: 2px solid #6b7280;
-        }
-        .btn-stone:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(145deg, #f59e0b, #d97706);
-            border-color: #fbbf24;
-            color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-        .btn-stone:active {
-            transform: translateY(1px);
-            box-shadow: inset 2px 2px 5px #1f2937;
-        }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<!-- Removed overflow-hidden, added overflow-y-auto and py-10 for better mobile scrolling -->
-<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-y-auto py-10">
 
-    <!-- Background Image - Changed to fixed so it stays put while scrolling -->
-    <div class="fixed inset-0 z-0">
+<html lang="ml">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stone Crusher Portal - Home</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+
+        body { font-family: 'Manjari', sans-serif; }
+
+        .industrial-font { font-family: 'Russo One', sans-serif; }
+
+        .stone-texture {
+
+            background-color: #2a2a2a;
+
+            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23454545' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+        }
+
+        .btn-stone {
+
+            background: linear-gradient(145deg, #4b5563, #374151);
+
+            box-shadow: 5px 5px 10px #1f2937, -5px -5px 10px #4b5563;
+
+            transition: all 0.3s ease;
+
+            border: 2px solid #6b7280;
+
+        }
+
+        .btn-stone:hover {
+
+            transform: translateY(-2px);
+
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+
+            border-color: #fbbf24;
+
+            color: #fff;
+
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+
+        }
+
+        .btn-stone:active {
+
+            transform: translateY(1px);
+
+            box-shadow: inset 2px 2px 5px #1f2937;
+
+        }
+
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
+
+
+
+    <!-- Background Image -->
+
+    <div class="absolute inset-0 z-0">
+
         <img src="https://images.unsplash.com/photo-1599824426573-c62551a31d99?q=80&w=2000&auto=format&fit=crop" 
+
              alt="Stone Crusher Background" 
+
              class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80"></div>
+
     </div>
 
-    <!-- Fullscreen Toggle Button -->
-    <button onclick="toggleFullScreen()" class="fixed top-4 right-4 z-50 p-3 btn-stone rounded-full text-white shadow-lg focus:outline-none" aria-label="Toggle Fullscreen">
-        <i data-lucide="maximize" class="w-5 h-5"></i>
-    </button>
+
 
     <!-- Main Content -->
+
     <main class="relative z-10 w-full max-w-4xl px-4 text-center fade-in">
+
         
+
         <div class="mb-12">
+
             <div class="flex justify-center mb-4">
+
                 <i data-lucide="hammer" class="w-16 h-16 text-yellow-500"></i>
+
             </div>
+
             <h1 class="industrial-font text-4xl md:text-6xl font-bold tracking-wider text-white mb-2 uppercase drop-shadow-lg">
+
                 Stone <span class="text-yellow-500">Crusher</span>
+
             </h1>
+
             <p class="text-gray-300 text-lg md:text-xl font-light tracking-wide">
+
                 മാനേജ്‌മെന്റ് പോർട്ടലിലേക്ക് സ്വാഗതം
+
             </p>
+
         </div>
+
+
 
         <div class="bg-gray-800/60 backdrop-blur-md border border-gray-600 rounded-2xl p-8 md:p-12 shadow-2xl max-w-2xl mx-auto">
+
             <h2 class="text-2xl font-semibold mb-8 text-gray-200 border-b border-gray-600 pb-4 inline-block">
+
                 Select Unit / വിഭാഗം തിരഞ്ഞെടുക്കുക
+
             </h2>
 
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+
                 <!-- AMARNATH Button -->
+
                 <a href="./amarnath.html" class="group btn-stone py-8 px-6 rounded-xl flex flex-col items-center justify-center gap-3 no-underline">
+
                     <div class="p-3 bg-gray-700 rounded-full group-hover:bg-yellow-600 transition-colors">
+
                         <i data-lucide="mountain" class="w-8 h-8 text-gray-300 group-hover:text-white"></i>
+
                     </div>
+
                     <span class="industrial-font text-2xl tracking-widest font-bold text-gray-100">AMARNATH</span>
+
                     <span class="text-xs text-gray-400 font-light group-hover:text-white">Unit 1</span>
+
                 </a>
+
+
 
                 <!-- RANI Button -->
+
                 <a href="./ranimetal.html" class="group btn-stone py-8 px-6 rounded-xl flex flex-col items-center justify-center gap-3 no-underline">
+
                     <div class="p-3 bg-gray-700 rounded-full group-hover:bg-yellow-600 transition-colors">
+
                         <i data-lucide="truck" class="w-8 h-8 text-gray-300 group-hover:text-white"></i>
+
                     </div>
+
                     <span class="industrial-font text-2xl tracking-widest font-bold text-gray-100">RANI</span>
+
                     <span class="text-xs text-gray-400 font-light group-hover:text-white">Unit 2</span>
+
                 </a>
+
             </div>
+
         </div>
+
         
+
         <footer class="mt-16 text-gray-500 text-sm">
+
             <p>&copy; 2024 Stone Crusher Management System.</p>
+
         </footer>
+
     </main>
 
+
+
     <script>
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Error attempting to enable full-screen mode: ${err.message}`);
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-        }
 
         document.addEventListener('DOMContentLoaded', () => {
+
             if (typeof lucide !== 'undefined') lucide.createIcons();
+
         });
+
     </script>
+
 </body>
+
 </html>
