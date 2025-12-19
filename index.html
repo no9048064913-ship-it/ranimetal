@@ -5,102 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stone Crusher Portal - Home</title>
     
-    <link rel="icon" type="png" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     
-    <meta name="theme-color" content="#2a2a2a">
+    <!-- Colorful theme color -->
+    <meta name="theme-color" content="#4f46e5">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Stone Crusher">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        body { font-family: 'Manjari', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .industrial-font { font-family: 'Russo One', sans-serif; }
-        .stone-texture {
-            background-color: #2a2a2a;
-            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23454545' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            /* Vibrant Gradient Background */
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 50%, #db2777 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
         }
-        .btn-stone {
-            background: linear-gradient(145deg, #4b5563, #374151);
-            box-shadow: 3px 3px 6px #1f2937, -3px -3px 6px #4b5563;
-            transition: all 0.3s ease;
-            border: 2px solid #6b7280;
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .btn-stone:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(145deg, #f59e0b, #d97706);
-            border-color: #fbbf24;
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        
+        /* Glassmorphism Container */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-        .btn-stone:active {
-            transform: translateY(1px);
-            box-shadow: inset 2px 2px 5px #1f2937;
+
+        /* Colorful Unit Cards */
+        .unit-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .unit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg) translateX(-150%);
+            transition: transform 0.5s;
+            z-index: -1;
+        }
+
+        .unit-card:hover::before {
+            transform: skewX(-20deg) translateX(150%);
+        }
+        
+        .unit-card:active {
+            transform: scale(0.96);
+            filter: brightness(1.1);
+        }
+        
+        /* Amarnath Gradient: Orange to Pink */
+        .unit-card.amarnath {
+            background: linear-gradient(110deg, #f97316 0%, #ec4899 100%);
+            box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Rani Gradient: Blue to Cyan */
+        .unit-card.rani {
+            background: linear-gradient(110deg, #0ea5e9 0%, #06b6d4 100%);
+            box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
     </style>
 </head>
-<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-y-auto py-4">
+<body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col items-center justify-center relative">
 
-    <div class="fixed inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1599824426573-c62551a31d99?q=80&w=2000&auto=format&fit=crop" 
-             alt="Stone Crusher Background" 
-             class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80"></div>
-    </div>
-
-    <button onclick="toggleFullScreen()" class="fixed top-4 right-4 z-50 p-2 btn-stone rounded-full text-white shadow-lg focus:outline-none" aria-label="Toggle Fullscreen">
-        <i data-lucide="maximize" class="w-5 h-5"></i>
+    <!-- Toggle Fullscreen Button -->
+    <button onclick="toggleFullScreen()" class="fixed top-4 right-4 z-50 p-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full text-white shadow-lg border border-white/30 transition-all duration-300 active:scale-90" aria-label="Toggle Fullscreen">
+        <i data-lucide="maximize" class="w-5 h-5 drop-shadow-md"></i>
     </button>
 
-    <main class="relative z-10 w-full max-w-4xl px-4 text-center fade-in flex flex-col items-center justify-center min-h-[90vh]">
+    <main class="relative z-10 w-full h-full max-w-md px-5 flex flex-col items-center justify-center fade-in-up">
         
-        <div class="mb-6">
-            <div class="flex justify-center mb-2">
-                <i data-lucide="hammer" class="w-12 h-12 text-yellow-500"></i>
+        <!-- Header Section -->
+        <div class="mb-8 text-center space-y-3 flex-shrink-0">
+            <div class="inline-flex items-center justify-center p-4 rounded-2xl bg-white shadow-xl rotate-3 transition-transform hover:rotate-0 duration-300">
+                <i data-lucide="hammer" class="w-10 h-10 text-indigo-600 fill-indigo-100"></i>
             </div>
-            <h1 class="industrial-font text-3xl md:text-5xl font-bold tracking-wider text-white mb-1 uppercase drop-shadow-lg">
-                Stone <span class="text-yellow-500">Crusher</span>
-            </h1>
-            <p class="text-gray-300 text-base md:text-lg font-light tracking-wide">
-                മാനേജ്‌മെന്റ് പോർട്ടലിലേക്ക് സ്വാഗതം
+            
+            <div class="flex flex-col">
+                <h1 class="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
+                    Stone Crusher
+                </h1>
+                <p class="text-white/80 text-xs font-semibold tracking-wider mt-1 uppercase">
+                    Management Portal
+                </p>
+            </div>
+            
+            <p class="text-indigo-900 text-[10px] font-bold tracking-wide bg-white/90 inline-block px-4 py-1 rounded-full shadow-lg">
+                മാനേജ്‌മെന്റ് പോർട്ടൽ
             </p>
         </div>
 
-        <div class="bg-gray-800/60 backdrop-blur-md border border-gray-600 rounded-2xl p-6 md:p-10 shadow-2xl max-w-xl mx-auto w-full">
-            <h2 class="text-xl font-semibold mb-6 text-gray-200 border-b border-gray-600 pb-3 inline-block">
-                Select Unit / വിഭാഗം തിരഞ്ഞെടുക്കുക
-            </h2>
+        <!-- Main Dashboard Card -->
+        <div class="glass-card w-full rounded-3xl overflow-hidden flex-shrink-0">
+            <div class="p-6">
+                
+                <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-200/60">
+                    <h2 class="text-sm font-bold text-slate-600 flex items-center gap-2 uppercase tracking-wide">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-500"></i>
+                        Select Unit
+                    </h2>
+                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        Online
+                    </span>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                <a href="./amarnath.html" class="group btn-stone py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 no-underline">
-                    <div class="p-2 bg-gray-700 rounded-full group-hover:bg-yellow-600 transition-colors">
-                        <i data-lucide="mountain" class="w-6 h-6 text-gray-300 group-hover:text-white"></i>
-                    </div>
-                    <span class="industrial-font text-xl tracking-widest font-bold text-gray-100">AMARNATH</span>
-                    <span class="text-[10px] text-gray-400 font-light group-hover:text-white uppercase tracking-wider">Unit 1</span>
-                </a>
+                <div class="grid grid-cols-1 gap-4 w-full">
+                    
+                    <!-- Amarnath Unit Card (Colorful) -->
+                    <a href="./amarnath.html" class="unit-card amarnath group rounded-2xl p-4 px-5 flex items-center justify-between gap-3 no-underline cursor-pointer select-none touch-manipulation">
+                        <div class="flex items-center gap-4">
+                            <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-xl text-white shadow-inner border border-white/20">
+                                <i data-lucide="mountain" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex flex-col text-white">
+                                <span class="text-[10px] font-bold opacity-80 uppercase tracking-wider">Unit 01</span>
+                                <span class="text-xl font-black tracking-tight leading-none mt-0.5">Amarnath</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/20 p-1.5 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-white"></i>
+                        </div>
+                    </a>
 
-                <a href="./ranimetal.html" class="group btn-stone py-4 px-4 rounded-xl flex flex-col items-center justify-center gap-2 no-underline">
-                    <div class="p-2 bg-gray-700 rounded-full group-hover:bg-yellow-600 transition-colors">
-                        <i data-lucide="truck" class="w-6 h-6 text-gray-300 group-hover:text-white"></i>
-                    </div>
-                    <span class="industrial-font text-xl tracking-widest font-bold text-gray-100">RANI</span>
-                    <span class="text-[10px] text-gray-400 font-light group-hover:text-white uppercase tracking-wider">Unit 2</span>
-                </a>
+                    <!-- Rani Unit Card (Colorful) -->
+                    <a href="./ranimetal.html" class="unit-card rani group rounded-2xl p-4 px-5 flex items-center justify-between gap-3 no-underline cursor-pointer select-none touch-manipulation">
+                        <div class="flex items-center gap-4">
+                            <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-xl text-white shadow-inner border border-white/20">
+                                <i data-lucide="truck" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex flex-col text-white">
+                                <span class="text-[10px] font-bold opacity-80 uppercase tracking-wider">Unit 02</span>
+                                <span class="text-xl font-black tracking-tight leading-none mt-0.5">Rani</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/20 p-1.5 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-white"></i>
+                        </div>
+                    </a>
+
+                </div>
             </div>
         </div>
         
-        <footer class="mt-8 text-gray-500 text-xs">
-            <p>&copy; Mudipu Stone Crushers Management System.</p>
+        <footer class="mt-8 text-white/60 text-[10px] font-medium text-center flex-shrink-0 tracking-wide">
+            <p>&copy; Mudipu Stone Crushers</p>
         </footer>
+
     </main>
 
     <script>
@@ -116,10 +199,12 @@
             }
         }
 
+        // Initialize Icons
         document.addEventListener('DOMContentLoaded', () => {
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         });
     </script>
 </body>
 </html>
-
