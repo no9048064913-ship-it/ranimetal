@@ -2,113 +2,162 @@
 <html lang="ml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Unit Dashboard</title>
+    
+    <link rel="icon" type="image/png" href="icon.png">
+    
+    <meta name="theme-color" content="#4f46e5">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        body { font-family: 'Manjari', sans-serif; }
-        .industrial-font { font-family: 'Russo One', sans-serif; }
-        .stone-texture {
-            background-color: #2a2a2a;
-            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23454545' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            /* Vibrant Gradient Background matching index.html */
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 50%, #db2777 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
         }
-        /* Updated .btn-stone to work with <a> tags */
-        .btn-stone {
-            background: linear-gradient(145deg, #4b5563, #374151);
-            box-shadow: 5px 5px 10px #1f2937, -5px -5px 10px #4b5563;
-            transition: all 0.3s ease;
-            border: 2px solid #6b7280;
-            display: flex; /* Ensure flex behavior works on anchor tags */
-            text-decoration: none; /* Remove default underline */
-            color: inherit; /* Inherit text color */
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .btn-stone:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(145deg, #f59e0b, #d97706);
-            border-color: #fbbf24;
-            color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        
+        /* Glassmorphism Container */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        /* Dashboard Item Cards */
+        .dash-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dash-btn:active {
+            transform: scale(0.96);
+        }
+
+        .dash-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.4), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .dash-btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* Custom Colors for Buttons */
+        .btn-blue { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .btn-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .btn-yellow { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .btn-purple { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
     </style>
 </head>
-<body class="stone-texture min-h-screen text-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
+<body class="h-screen w-screen overflow-hidden text-slate-800 flex flex-col items-center justify-center relative">
 
-    <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1599824426573-c62551a31d99?q=80&w=2000&auto=format&fit=crop" 
-             alt="Stone Crusher Background" 
-             class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80"></div>
-    </div>
+    <!-- Back Button (Floating) -->
+    <a href="index.html" class="absolute top-4 left-4 z-50 p-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full text-white shadow-lg border border-white/30 transition-all active:scale-90 flex items-center justify-center">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </a>
 
-    <main class="relative z-10 w-full max-w-5xl px-4 text-center fade-in">
+    <main class="relative z-10 w-full h-full max-w-md px-5 flex flex-col items-center justify-center fade-in-up">
         
-        <!-- Navbar / Back Button -->
-        <div class="flex justify-between items-center mb-8 bg-gray-800/80 p-4 rounded-xl border border-gray-600 backdrop-blur-sm">
-            <a href="./index.html" class="flex items-center gap-2 text-gray-300 hover:text-yellow-500 transition-colors no-underline">
-                <i data-lucide="arrow-left" class="w-6 h-6"></i>
-                <span class="font-bold">Back to Home</span>
-            </a>
-            <div class="text-right">
-                <h2 id="unit-title" class="industrial-font text-3xl text-yellow-500 tracking-wider">RANI METAL</h2>
-                <p class="text-xs text-gray-400">Management Dashboard</p>
+        <!-- Header Section -->
+        <div class="mb-6 text-center space-y-1 flex-shrink-0 w-full">
+            <h1 id="unit-title" class="text-3xl font-black tracking-tight text-white drop-shadow-md uppercase">
+                RANI METAL
+            </h1>
+            <p class="text-white/80 text-xs font-medium tracking-wider uppercase">
+                Management Dashboard
+            </p>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="glass-card w-full rounded-3xl overflow-hidden flex-shrink-0 shadow-2xl">
+            <div class="p-5">
+                <!-- 2x2 Grid Layout -->
+                <div class="grid grid-cols-2 gap-3 w-full">
+                    
+                    <!-- 1. Customer Statement -->
+                    <a href="customer_statement.html" class="dash-btn btn-blue group rounded-2xl p-4 flex flex-col items-center justify-center gap-2 no-underline cursor-pointer select-none aspect-square shadow-lg border border-white/20">
+                        <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white shadow-inner">
+                            <i data-lucide="file-text" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-center text-white">
+                            <span class="block text-xs font-bold uppercase tracking-wide opacity-90">Customer</span>
+                            <span class="block text-[10px] opacity-75 font-light mt-0.5">ഉപഭോക്തൃ വിവരങ്ങൾ</span>
+                        </div>
+                    </a>
+
+                    <!-- 2. Expense -->
+                    <a href="expense.html" class="dash-btn btn-red group rounded-2xl p-4 flex flex-col items-center justify-center gap-2 no-underline cursor-pointer select-none aspect-square shadow-lg border border-white/20">
+                        <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white shadow-inner">
+                            <i data-lucide="coins" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-center text-white">
+                            <span class="block text-xs font-bold uppercase tracking-wide opacity-90">Expense</span>
+                            <span class="block text-[10px] opacity-75 font-light mt-0.5">ചെലവുകൾ</span>
+                        </div>
+                    </a>
+
+                    <!-- 3. Soling -->
+                    <a href="https://script.google.com/macros/s/AKfycbxL5Bz7NdLT6HgPizNSZCHodQaMyY9OQA73_v9yU321a6PCn21W0qn7wyMCOI2Om26d/exec" class="dash-btn btn-yellow group rounded-2xl p-4 flex flex-col items-center justify-center gap-2 no-underline cursor-pointer select-none aspect-square shadow-lg border border-white/20">
+                        <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white shadow-inner">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-center text-white">
+                            <span class="block text-xs font-bold uppercase tracking-wide opacity-90">Soling</span>
+                            <span class="block text-[10px] opacity-75 font-light mt-0.5">സോളിംഗ് സ്റ്റോക്ക്</span>
+                        </div>
+                    </a>
+
+                    <!-- 4. MD -->
+                    <a href="md.html" class="dash-btn btn-purple group rounded-2xl p-4 flex flex-col items-center justify-center gap-2 no-underline cursor-pointer select-none aspect-square shadow-lg border border-white/20">
+                        <div class="p-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white shadow-inner">
+                            <i data-lucide="user-cog" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-center text-white">
+                            <span class="block text-xs font-bold uppercase tracking-wide opacity-90">MD</span>
+                            <span class="block text-[10px] opacity-75 font-light mt-0.5">മാനേജിംഗ് ഡയറക്ടർ</span>
+                        </div>
+                    </a>
+
+                </div>
             </div>
         </div>
+        
+        <footer class="mt-8 text-white/60 text-[10px] font-medium text-center flex-shrink-0 tracking-wide">
+            <p>&copy; Mudipu Stone Crushers</p>
+        </footer>
 
-        <!-- Dashboard Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <!-- Link 1: Customer Statement -->
-            <a href="customer_statement.html" class="btn-stone p-6 rounded-xl flex-col items-center justify-center gap-4 h-48 group">
-                <div class="p-4 bg-gray-700/50 rounded-full group-hover:bg-blue-600 transition-colors">
-                    <i data-lucide="file-text" class="w-10 h-10 text-blue-300 group-hover:text-white"></i>
-                </div>
-                <div class="text-center">
-                    <span class="block font-bold text-lg mb-1">CUSTOMER STATEMENT</span>
-                    <span class="text-xs text-gray-400 font-manjari">ഉപഭോക്തൃ വിവരങ്ങൾ</span>
-                </div>
-            </a>
-
-            <!-- Link 2: Expense -->
-            <a href="expense.html" class="btn-stone p-6 rounded-xl flex-col items-center justify-center gap-4 h-48 group">
-                <div class="p-4 bg-gray-700/50 rounded-full group-hover:bg-red-600 transition-colors">
-                    <i data-lucide="coins" class="w-10 h-10 text-red-300 group-hover:text-white"></i>
-                </div>
-                <div class="text-center">
-                    <span class="block font-bold text-lg mb-1">EXPENSE</span>
-                    <span class="text-xs text-gray-400 font-manjari">ചെലവുകൾ</span>
-                </div>
-            </a>
-
-            <!-- Link 3: Soling -->
-            <a href="https://script.google.com/macros/s/AKfycbxL5Bz7NdLT6HgPizNSZCHodQaMyY9OQA73_v9yU321a6PCn21W0qn7wyMCOI2Om26d/exec" class="btn-stone p-6 rounded-xl flex-col items-center justify-center gap-4 h-48 group">
-                <div class="p-4 bg-gray-700/50 rounded-full group-hover:bg-yellow-600 transition-colors">
-                    <i data-lucide="layers" class="w-10 h-10 text-yellow-300 group-hover:text-white"></i>
-                </div>
-                <div class="text-center">
-                    <span class="block font-bold text-lg mb-1">SOLING</span>
-                    <span class="text-xs text-gray-400 font-manjari">സോളിംഗ് സ്റ്റോക്ക്</span>
-                </div>
-            </a>
-
-            <!-- Link 4: MD -->
-            <a href="md.html" class="btn-stone p-6 rounded-xl flex-col items-center justify-center gap-4 h-48 group">
-                <div class="p-4 bg-gray-700/50 rounded-full group-hover:bg-purple-600 transition-colors">
-                    <i data-lucide="user-cog" class="w-10 h-10 text-purple-300 group-hover:text-white"></i>
-                </div>
-                <div class="text-center">
-                    <span class="block font-bold text-lg mb-1">MD</span>
-                    <span class="text-xs text-gray-400 font-manjari">മാനേജിംഗ് ഡയറക്ടർ</span>
-                </div>
-            </a>
-
-        </div>
     </main>
 
     <script>
@@ -116,7 +165,7 @@
             // Initialize Icons
             if (typeof lucide !== 'undefined') lucide.createIcons();
 
-            // Get Unit Name from URL Parameter
+            // Handle Dynamic Unit Name from URL
             const params = new URLSearchParams(window.location.search);
             const unitName = params.get('unit');
             
@@ -124,12 +173,11 @@
                 document.getElementById('unit-title').textContent = unitName;
                 document.title = unitName + " Dashboard";
 
-                // Optional: Pass the unit name to the sub-pages via URL parameters
-                // This code appends ?unit=UnitName to all the links we just made
-                const links = document.querySelectorAll('.btn-stone');
+                // Pass the unit name to sub-pages
+                const links = document.querySelectorAll('.dash-btn');
                 links.forEach(link => {
                     const currentHref = link.getAttribute('href');
-                    if(currentHref && !currentHref.includes('?')) {
+                    if(currentHref && !currentHref.includes('?') && !currentHref.startsWith('http')) {
                         link.setAttribute('href', `${currentHref}?unit=${encodeURIComponent(unitName)}`);
                     }
                 });
